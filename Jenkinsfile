@@ -28,7 +28,7 @@ pipeline {
 
         stage('Build & SonarQube Analysis') {
             steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_TOKEN')]) {
                     sh """
                     mvn clean verify sonar:sonar \
                     -Dsonar.projectKey=devsecops-demo \
