@@ -8,7 +8,7 @@ pipeline {
     environment {
         SONAR_IP     = '43.205.191.220'
         AWS_REGION   = 'ap-south-1'
-        ECR_REGISTRY = '513348750131.dkr.ecr.us-east-1.amazonaws.com/devsecops-demo'
+        ECR_REGISTRY = '513348750131.dkr.ecr.ap-south-1.amazonaws.com/devsecops-demo'
         IMAGE_REPO   = "${ECR_REGISTRY}/devsecops-demo"
     }
 
