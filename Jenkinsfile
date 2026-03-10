@@ -1,12 +1,12 @@
 pipeline {
-    agent { label 'docker-maven-trivy' }
+    agent any
 
     tools {
         maven 'maven3'
     }
 
     environment {
-        SONAR_IP     = '172.31.37.48'
+        SONAR_IP     = '43.205.191.220'
         AWS_REGION   = 'ap-south-1'
         ECR_REGISTRY = '386275436648.dkr.ecr.ap-south-1.amazonaws.com'
         IMAGE_REPO   = "${ECR_REGISTRY}/devsecops-demo"
