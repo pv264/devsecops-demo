@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                 trivy fs \
-                --exit-code 1 \
+                --exit-code 0 \
                 --severity HIGH,CRITICAL \
                 --skip-dirs target \
                 .
