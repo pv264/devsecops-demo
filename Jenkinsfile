@@ -78,6 +78,25 @@ pipeline {
                 sh 'docker push "$IMAGE_REPO:latest"'
             }
         }
+
+        stage('Update Helm Repo') {
+            steps {
+                sh '''
+                rm -rf devsecops-demo-helm || true
+                git clone https://github.com/pv264/devsecops-demo-helm.git
+                cd devsecops-demo-helm/devsecops-demo
+
+                sed -i "s/tag:.*/tag: ${BUILD_NUMBER}/" values.yaml
+
+                git config user.email "jenkins@demo.com"
+                git config user.name "jenkins"
+
+                git add values.yaml
+                git commit -m "Update image tag to ${BUILD_NUMBER}"
+                git push origin main
+                '''
+            }
+        }
     }
 
     post {
