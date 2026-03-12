@@ -80,32 +80,23 @@ pipeline {
         }
 
         stage('Update Helm Repo') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                    sh '''
-                    rm -rf devsecops-demo-helm || true
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+            sh '''
+            rm -rf devsecops-demo-helm || true
 
-                    git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/pv264/devsecops-demo-helm.git
-                    cd devsecops-demo-helm/devsecops-demo
+            git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/pv264/devsecops-demo-helm.git
+            cd devsecops-demo-helm/devsecops-demo
 
-                    sed -i "s/tag:.*/tag: ${BUILD_NUMBER}/" values.yaml
+            yq e '.image.tag = "'${BUILD_NUMBER}'"' -i values.yaml
 
-                    git config user.email "jenkins@demo.com"
-                    git config user.name "jenkins"
+            git config user.email "jenkins@demo.com"
+            git config user.name "jenkins"
 
-                    git add values.yaml
-                    git commit -m "Update image tag to ${BUILD_NUMBER}"
-                    git push origin main
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            cleanWs()
-            sh 'docker system prune -af || true'
+            git add values.yaml
+            git commit -m "Update image tag to ${BUILD_NUMBER}"
+            git push origin main
+            '''
         }
     }
 }
