@@ -14,7 +14,7 @@ IMAGE_REPO   = "${ECR_REGISTRY}/devsecops-demo"
 
 stages {
 
-```
+
 stage('Trivy FS Scan') {
     steps {
         sh '''
