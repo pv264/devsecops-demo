@@ -10,6 +10,7 @@ SONAR_IP     = '13.206.12.244'
 AWS_REGION   = 'ap-south-1'
 ECR_REGISTRY = '513348750131.dkr.ecr.ap-south-1.amazonaws.com'
 IMAGE_REPO   = "${ECR_REGISTRY}/devsecops-demo"
+KUBECONFIG = "/var/lib/jenkins/.kube/config"
 }
 
 stages {
