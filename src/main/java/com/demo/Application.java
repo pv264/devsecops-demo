@@ -11,7 +11,7 @@ public class Application {
 
     @GetMapping("/")
     public String home() {
-        return "TechnoIdentity-DevSecOps Demo Application Running5!";
+        return "TechnoIdentity-DevSecOps Demo Application Running6!";
     }
 
     public static void main(String[] args) {
